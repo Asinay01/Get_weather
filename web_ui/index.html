@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Прогноз погоды</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div align="center">
+      <input id="city" type="text" placeholder="Российский город"
+      value="Москва" required=""><br>
+      <button id="getdata">Узнать погоду!</button>
+      <div>
+        <p id="weather"></p>
+        <p id="details"></p>
+      </div>
+    </div>
+    <script src="/jquery-3.7.0.slim.min.js"></script>
+    <script type="text/javascript">
+        async function getdata (){
+            let city = document.getElementById('city').value;
+            let response = await eel.send_data(city)();
+            document.getElementById('weather').innerHTML = response.temp;
+            document.getElementById('details').innerHTML = response.details;
+        }
+        jQuery('#getdata').on('click', function(){
+            getdata();
+            document.getElementById('city').value = '';
+        });
+    </script>
+    <footer>
+      <hr>
+      © Дегтярев Богдан БВТ2252
+    </footer>
+  </body>
+</html>
